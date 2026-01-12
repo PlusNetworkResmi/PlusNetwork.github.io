@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>PlusNetwork | Resmi Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--p1:#1a0126;--p2:#2d0b45;--p3:#5a189a;--p4:#9d4edd;--metal:rgba(255,255,255,.08);--text:#eaeaea}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Orbitron',sans-serif;background:linear-gradient(135deg,var(--p1),var(--p2),var(--p1));color:var(--text)}
+header{background:linear-gradient(180deg,#2a0a3d,#1a0126);border-bottom:1px solid rgba(255,255,255,.1)}
+nav{max-width:1200px;margin:auto;padding:15px 25px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:26px;font-weight:800;color:var(--p4);display:flex;align-items:center;gap:12px}
+.menu a{color:var(--text);text-decoration:none;margin-left:10px;padding:10px 16px;border-radius:10px;background:var(--metal);border:1px solid rgba(255,255,255,.12);cursor:pointer}
+.menu a:hover{background:linear-gradient(135deg,var(--p3),var(--p4))}
+section{max-width:1100px;margin:auto;padding:60px 25px;display:none}
+section.active{display:block}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border-radius:20px;padding:30px;border:1px solid rgba(255,255,255,.15);margin-bottom:20px}
+input,textarea,button{width:100%;margin-top:10px;padding:12px;border-radius:10px;border:none;font-family:inherit}
+button{background:linear-gradient(135deg,var(--p3),var(--p4));color:#003b1f;cursor:pointer;font-weight:700}
+.support-item{border-bottom:1px solid rgba(255,255,255,.1);padding:10px 0}
+footer{text-align:center;padding:20px;font-size:13px;opacity:.7}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<div class="logo"><img src="remove.photos-removed-background.png"
+style="height:42px">PLUSNETWORK</div>
+<div class="menu">
+<a onclick="showSection('home')">Ana Sayfa</a>
+<a onclick="showSection('support')">Destek</a>
+<a onclick="showSection('crateRequest')">Kasa Kiti Talep Et</a>
+<a onclick="showSection('about')">Hakkında</a>
+<a onclick="showSection('login')" id="loginBtn">Yetkili Giriş</a>
+<a href="" target="_blank">Youtube
+<a onclick="logout()" id="logoutBtn" style="display:none;background:#8b0000;color:#fff">Oturumu Kapat</a>
+<a onclick="showSection('adminSupport')" id="adminSupportBtn" style="display:none">Destek Kontrol</a>
+</div>
+</nav>
+</header>
+
+<section id="home" class="active">
+<div style="text-align:center;margin-bottom:25px;">
+  <img src="remove.photos-removed-background.png" style="height:130px;opacity:0.97;filter:drop-shadow(0 0 25px rgba(60,255,143,0.75));">
+</div>
+<div class="card"><h1>PlusNetwork</h1><br>Gelişmiş Survival Minecraft Sunucusu<br><br><b>IP:</b> play.plusnetwork.com</div>
+<div class="card"><h2>Sunucu Modları</h2><br>🌲 Survival (Ana Dünya)<br>🧭 Lobby Sistemi<br>☁️ SkyBlock (Yakında)</div>
+<div class="card"><h2>Neden PlusNetwork?</h2><br>✔ Profesyonel altyapı<br>✔ Aktif ve ilgili yetkili ekibi<br>✔ Lag'sız & dengeli survival<br>✔ Oyuncu dostu ekonomi</div>
+</section>
+
+<section id="support">
+<div class="card">
+<h2>Destek Türü</h2>
+<button onclick="openForm('Yardım')">Yardım</button>
+<button onclick="openForm('Öneri')">Öneri</button>
+<button onclick="openForm('Oyuncu Şikayet')">Oyuncu Şikayet</button>
+</div>
+<div class="card" id="supportForm" style="display:none">
+<h3 id="supportType"></h3>
+<input id="player" placeholder="Minecraft Nick">
+<textarea id="message" placeholder="Mesaj"></textarea>
+<button onclick="saveSupport()">Gönder</button>
+</div>
+<div class="card"><h3>Desteklerim</h3><div id="userSupports"></div></div>
+</section>
+
+<section id="crateRequest">
+<div class="card">
+<h2>Kasa Kiti Talep Et</h2>
+<p style="font-size:13px;opacity:.8;line-height:1.6">
+Oyunda <b>/kasalar</b> komutunu yazdığınızda gittiğiniz alanda bulunan <b>Elmas, Altın, Zümrüt ve Netherite</b> hunilerine,
+<b>oyun içi kullanıcı adınızı</b> bir kağıda yazarak atınız. İşlemi tamamladıktan sonra bu menüden talep oluşturunuz.
+</p>
+<input id="cratePlayer" placeholder="Minecraft Kullanıcı Adın">
+<button onclick="saveCrateRequest()">Gönder</button>
+</div>
+</section>
+
+<section id="about">
+<div class="card">
+<h2>PlusNetwork Hakkında</h2><br>
+PlusNetwork, oyunculara uzun süreli ve keyifli bir <b>Survival</b> deneyimi sunmak için kurulmuştur.<br><br>
+<b>Kurucu:</b> Salih<br>
+<b>Developer:</b> SALIXCY<br>
+<b>Yetkili Ekibi:</b> Aktif & Deneyimli
+</div>
+</section>
+
+<section id="login">
+<div class="card"><h2>Yetkili Giriş</h2><input id="pass" type="password" placeholder="Yetkili Şifresi"><button onclick="login()">Giriş</button></div>
+</section>
+
+<section id="adminSupport">
+<div class="card"><h2>Destek Kontrol Paneli</h2><div id="allSupports"></div></div>
+</section>
+
+<footer>© 2026 PlusNetwork</footer>
+
+<script>
+const PASS = '789456123';
+
+let supports = JSON.parse(localStorage.getItem('supports') || '[]');
+let crateRequests = JSON.parse(localStorage.getItem('crateRequests') || '[]');
+let currentType = '';
+
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+
+  if (id === 'support') loadUser();
+  if (id === 'adminSupport') loadAdmin();
+}
+
+function openForm(type) {
+  currentType = type;
+  document.getElementById('supportForm').style.display = 'block';
+  document.getElementById('supportType').innerText = type;
+}
+
+function saveSupport() {
+  const playerEl = document.getElementById('player');
+  const messageEl = document.getElementById('message');
+
+  if (!playerEl.value || !messageEl.value) {
+    alert('Boş alan bırakmayın');
+    return;
+  }
+
+  supports.push({
+    type: currentType,
+    player: playerEl.value,
+    msg: messageEl.value,
+    time: new Date().toLocaleString(),
+    reply: 'Beklemede'
+  });
+
+  localStorage.setItem('supports', JSON.stringify(supports));
+  playerEl.value = '';
+  messageEl.value = '';
+  loadUser();
+  alert('Destek gönderildi');
+}
+
+function loadUser() {
+  const box = document.getElementById('userSupports');
+  box.innerHTML = '';
+
+  supports.forEach((s,i) => {
+    panel.innerHTML += `<div class="support-item">
+      <b>${s.player}</b> | ${s.type}<br>
+      ${s.msg}<br>${s.time}<br>
+      <button onclick="replyContact(${i})">SALIXCY ile iletişime geçiniz</button>
+      <button onclick="replyDone(${i})">İşlem Onaylandı</button>
+    </div>`;
+  });
+}
+
+function replyContact(i){
+  supports[i].reply = 'SALIXCY ile iletişime geçiniz';
+  localStorage.setItem('supports', JSON.stringify(supports));
+  loadAdmin();
+  loadUser();
+}
+
+function replyDone(i){
+  supports[i].reply = 'İşlem Uygulandı';
+  localStorage.setItem('supports', JSON.stringify(supports));
+  loadAdmin();
+  loadUser();
+}
+
+function saveCrateRequest() {
+  const input = document.getElementById('cratePlayer');
+
+  if (!input.value) {
+    alert('Minecraft kullanıcı adını giriniz');
+    return;
+  }
+
+  crateRequests.push({
+    player: input.value,
+    time: new Date().toLocaleString()
+  });
+
+  localStorage.setItem('crateRequests', JSON.stringify(crateRequests));
+  input.value = '';
+  alert('Kasa kiti talebin alındı');
+}
+
+function loadAdmin() {
+  const panel = document.getElementById('allSupports');
+  panel.innerHTML = '';
+
+  supports.forEach(s => {
+    panel.innerHTML += `<div class="support-item"><b>${s.player}</b> | ${s.type}<br>${s.msg}<br>${s.time}</div>`;
+  });
+
+  if (crateRequests.length > 0) {
+    panel.innerHTML += '<hr style="margin:15px 0;opacity:.3"><h3>Kasa Kiti Talepleri</h3>';
+
+    crateRequests.forEach(r => {
+      panel.innerHTML += `<div class="support-item"><b>${r.player}</b><br>${r.time}</div>`;
+    });
+  }
+}
+
+function login() {
+  const passEl = document.getElementById('pass');
+
+  if (passEl.value === PASS) {
+    document.getElementById('loginBtn').style.display = 'none';
+    document.getElementById('logoutBtn').style.display = 'inline-block';
+    document.getElementById('adminSupportBtn').style.display = 'inline-block';
+    showSection('home');
+  } else {
+    alert('Şifre yanlış');
+  }
+}
+
+function logout() {
+  document.getElementById('loginBtn').style.display = 'inline-block';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('adminSupportBtn').style.display = 'none';
+  showSection('home');
+}
+</script>
+</body>
+</html>
