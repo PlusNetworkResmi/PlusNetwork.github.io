@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlusNetwork</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090a0f;--text:#fff;--muted:#cfd3ff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{
+background:
+radial-gradient(circle at 20% 30%, #7f5bff 0%, transparent 40%),
+radial-gradient(circle at 80% 20%, #00e5ff 0%, transparent 35%),
+radial-gradient(circle at 50% 80%, #ff4fd8 0%, transparent 40%),
+#090a0f;
+color:var(--text);min-height:100vh}
+header{position:fixed;top:0;width:100%;height:72px;background:rgba(9,10,15,.6);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.12);z-index:1000}
+.nav{max-width:1300px;margin:auto;height:100%;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:22px;font-weight:800;background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8);-webkit-background-clip:text;color:transparent}
+.menu{display:flex;gap:24px;align-items:center}
+.menu a{color:#fff;text-decoration:none;font-weight:600}
+.menu button{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;padding:10px 18px;border-radius:999px;cursor:pointer}
+.hero{padding:180px 32px 120px;text-align:center}
+.hero h1{font-size:72px;font-weight:800;margin-bottom:18px}
+.hero p{color:var(--muted);font-size:18px;margin-bottom:26px}
+.ip-box{display:inline-flex;gap:14px;align-items:center;padding:14px 22px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25)}
+.ip-box button{border:none;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000}
+.modal.active{display:flex}
+.modal-box{background:#0d0f18;padding:36px;border-radius:22px;width:340px;text-align:center}
+.modal-box input{width:100%;padding:12px;border-radius:12px;border:none;margin-bottom:16px}
+.modal-box button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:700;background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8)}
+.ranks{display:none;padding:140px 32px}
+.rank-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px}
+.rank{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:22px;padding:22px;text-align:center;position:relative}
+.rank img{width:100%;border-radius:14px;margin-bottom:12px}
+.rank button{margin-top:10px;padding:10px 18px;border:none;border-radius:999px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8)}
+.cart-box{position:fixed;right:20px;bottom:20px;width:300px;background:rgba(10,12,20,.85);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:16px;backdrop-filter:blur(15px)}
+.cart-box h3{text-align:center;margin-bottom:10px}
+.cart-box ul{list-style:none;font-size:14px}
+.cart-box li{margin-bottom:6px}
+.cart-box button{margin-top:10px;width:100%;padding:10px;border:none;border-radius:12px;font-weight:700;background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8)}
+.shop{display:none;padding:160px 32px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+<div class="nav">
+<div class="brand">PlusNetwork</div>
+<nav class="menu">
+<a href="#" onclick="showHome()">Ana Sayfa</a>
+<a href="plusshop.html" onclick="openShop()">PlusShop</a>
+<button id="loginBtn" onclick="openLogin()">Giriş Yap</button>
+</nav>
+</div>
+</header>
+<section class="hero" id="home">
+<h1>PlusNetwork</h1>
+<p>Kaliteli, şık ve iddialı Minecraft Network</p>
+<div class="ip-box"><span id="serverIp">PlusNetwork.aternos.me</span><button onclick="copyIP()">Kopyala</button></div>
+</section>
+<section class="shop" id="shop"><h2 style="font-size:42px">PlusShop</h2><p style="color:var(--muted)">Rütbeler sayfasına geçmek için aşağıdan devam et</p><button style="margin-top:30px" onclick="openRanks()">Rütbeler</button></section>
+<section class="ranks" id="ranks">
+<h2 style="text-align:center;font-size:42px;margin-bottom:40px">Rütbeler</h2>
+<div class="rank-grid">
+<div class="rank"><img src="1.png"><h3>Iron</h3><p>128 Elmas</p><button onclick="addToCart('Iron',128)">Sepetime Ekle</button></div>
+<div class="rank"><img src="2.png"><h3>Diamond</h3><p>256 Elmas</p><button onclick="addToCart('Diamond',256)">Sepetime Ekle</button></div>
+<div class="rank"><img src="3.png"><h3>Star</h3><p>512 Elmas</p><button onclick="addToCart('Star',512)">Sepetime Ekle</button></div>
+<div class="rank"><img src="4.png"><h3>Netherite</h3><p>1024 Elmas</p><button onclick="addToCart('Netherite',1024)">Sepetime Ekle</button></div>
+<div class="rank"><img src="5.png"><h3>Netherite+</h3><p>2048 Elmas</p><button onclick="addToCart('Netherite+',2048)">Sepetime Ekle</button></div>
+</div>
+</section>
+
+<script>
+let cart=[];
+function openLogin(){loginModal.classList.add('active')}
+function login(){if(!username.value)return;localStorage.user=username.value;loginModal.classList.remove('active');updateLogin()}
+function updateLogin(){loginBtn.textContent=localStorage.user?'Çıkış Yap':'Giriş Yap';loginBtn.onclick=localStorage.user?logout:openLogin}
+function logout(){localStorage.removeItem('user');updateLogin()}
+function hideAll(){['home','shop','ranks'].forEach(id=>document.getElementById(id).style.display='none')}
+function showHome(){hideAll();home.style.display='block'}
+function openShop(){if(!localStorage.user)return openLogin();hideAll();shop.style.display='block'}
+function openRanks(){if(!localStorage.user)return openLogin();hideAll();ranks.style.display='block'}
+function addToCart(name,price){cart.push({name,price});renderCart()}
+function renderCart(){cartList.innerHTML='';let total=0;cart.forEach(i=>{total+=i.price;cartList.innerHTML+=`<li>${i.name} - ${i.price} Elmas</li>`});cartTotal.innerHTML=`<strong>Toplam: ${total} Elmas</strong>`}
+function completeOrder(){if(cart.length===0)return;const code=Math.random().toString(36).substring(2,8).toUpperCase();let text='Sipariş Kodu: '+code+'\n';let total=0;cart.forEach(i=>{text+=`${i.name}: ${i.price} Elmas\n`;total+=i.price});text+=`Toplam: ${total} Elmas`;alert(text);cart=[];renderCart()}
+function copyIP(){navigator.clipboard.writeText(serverIp.innerText);alert('IP kopyalandı')}
+updateLogin();showHome();
+</script>
+</body>
+</html>

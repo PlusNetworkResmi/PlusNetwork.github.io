@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlusNetwork - CommandShop</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{
+  min-height:100vh;
+  color:#fff;
+  background:
+    radial-gradient(circle at 20% 30%, #7f5bff 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, #00e5ff 0%, transparent 35%),
+    radial-gradient(circle at 50% 80%, #ff4fd8 0%, transparent 40%),
+    #090a0f;
+}
+header{
+  position:fixed;top:0;left:0;width:100%;height:70px;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(18px);
+  z-index:1000;
+}
+.nav{
+  max-width:1200px;margin:auto;height:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+}
+.brand{
+  font-weight:800;font-size:22px;
+  background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8);
+  -webkit-background-clip:text;color:transparent;
+}
+.menu a{color:#fff;text-decoration:none;margin-right:20px;font-weight:600}
+
+main{padding-top:120px;text-align:center}
+
+.shop-grid{
+  max-width:1100px;margin:60px auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+}
+.item{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:22px;padding:26px;
+}
+.item h3{margin-bottom:6px}
+.item small{opacity:.75;display:block;margin-bottom:6px}
+.item .price{font-weight:700;margin-top:6px}
+.item button{
+  margin-top:14px;
+  background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8);
+  border:none;padding:10px 18px;border-radius:999px;
+  font-weight:700;cursor:pointer;
+}
+
+/* SEPET */
+.cart{
+  position:fixed;right:20px;bottom:20px;
+  width:280px;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:18px;padding:16px;
+}
+.cart h4{margin-bottom:6px}
+.cart p{font-size:13px;opacity:.7;margin-bottom:8px}
+.cart code{
+  display:block;
+  background:#000;padding:10px;
+  border-radius:10px;
+  word-break:break-all;
+}
+.cart button{
+  margin-top:12px;width:100%;
+  background:linear-gradient(90deg,#7f5bff,#00e5ff,#ff4fd8);
+  border:none;padding:10px;border-radius:999px;
+  font-weight:700;cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">PlusNetwork</div>
+    <div class="menu">
+      <a href="index.html">Ana Sayfa</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>CommandShop</h1>
+  <p style="opacity:.7">Tüm ödemeler <b>Elmas</b> ile oyun içinden yapılır.</p>
+
+  <div class="shop-grid">
+
+    <div class="item">
+      <h3>7 Günlük Fly Komutu</h3>
+     
+      <div class="price">960 Elmas</div>
+      <button onclick="add('F')">Sepete Ekle</button>
+    </div>
+
+    <div class="item">
+      <h3>Zümrüt (64)</h3>
+  
+      <div class="price">188 Elmas</div>
+      <button onclick="add('S')">Sepete Ekle</button>
+    </div>
+
+    <div class="item">
+      <h3>Altın (64)</h3>
+     
+      <div class="price">50 Elmas</div>
+      <button onclick="add('Y')">Sepete Ekle</button>
+    </div>
+
+  </div>
+</main>
+
+<div class="cart">
+  <h4>Sepet Kodu</h4>
+  <p>Sipariş tamamlanınca yetkiliye verilir</p>
+  <code id="cartCode">—</code>
+  <button onclick="finish()">Siparişi Tamamla</button>
+</div>
+
+<script>
+let cartCode = "";
+
+function add(letter){
+  cartCode += letter.repeat(3);
+  document.getElementById("cartCode").innerText = cartCode;
+}
+
+function finish(){
+  if(!cartCode){
+    alert("Sepet boş");
+    return;
+  }
+
+  const username = prompt("Oyuncu adını gir:");
+  if(!username){
+    alert("Oyuncu adı girilmeden sipariş oluşturulamaz");
+    return;
+  }
+
+  const finalCode = cartCode + "-" + username;
+
+  alert(
+    "Sipariş Kodun:\n\n" +
+    finalCode +
+    "\n\nLütfen bu kodu yetkililere iletin.\nÖdeme elmas ile yapılır."
+  );
+
+  cartCode = "";
+  document.getElementById("cartCode").innerText = "—";
+}
+</script>
+
+</body>
+</html>
